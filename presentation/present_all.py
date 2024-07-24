@@ -12,7 +12,3 @@ dbutils.notebook.run("../presentation/dominant_teams",0)
 # COMMAND ----------
 
 dbutils.notebook.run("../presentation/dominant_teams_visualization",0)
-
-# COMMAND ----------
-
-dbutils.notebook.exit("All presentations updated successfully")

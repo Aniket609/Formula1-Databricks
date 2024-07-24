@@ -1,4 +1,5 @@
 # Databricks notebook source
+#this uses Service Principle based access to create mounts, with all secrets storeed in Azure Keyvault, accessing through secret scope
 def createMount(storage_account_name, container_name):    
     application_id = dbutils.secrets.get(scope='formula1_scope', key="formula1-application-id")
     directory_id = dbutils.secrets.get(scope='formula1_scope', key="formula1-directory-id")
@@ -21,6 +22,7 @@ def createMount(storage_account_name, container_name):
 
 # COMMAND ----------
 
+#storage account and containers must be created before running this
 createMount(storage_account_name="aniketformula1dl", container_name="raw")
 createMount(storage_account_name="aniketformula1dl", container_name="processed")
 createMount(storage_account_name="aniketformula1dl", container_name="presentation")
