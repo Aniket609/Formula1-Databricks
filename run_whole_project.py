@@ -26,7 +26,7 @@ dbutils.notebook.run("../Formula1-Databricks/presentation/present_all",0)
 
 # COMMAND ----------
 
-#uncomment the code below and run to delete table history and optimize your database
+#uncomment the code below and run to delete table history and optimize your database to save storage
 """
 def vacuum_and_optimize_database(database):
     tables = spark.sql(f"SHOW TABLES IN {database} ").select("tableName").rdd.flatMap(lambda x: x).collect()
