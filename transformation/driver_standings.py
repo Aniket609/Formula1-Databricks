@@ -8,10 +8,6 @@ race_results_df=spark.read.format('delta').load(f"{presentation_path}/race_resul
 
 # COMMAND ----------
 
-race_results_df.printSchema()
-
-# COMMAND ----------
-
 from pyspark.sql.functions import sum,count,when,col
 final_df=race_results_df.groupBy('race_year','driver_name','driver_nationality','team')\
                                 .agg(sum('points').alias('total_points'),\
@@ -24,10 +20,6 @@ from pyspark.sql.functions import desc,rank
 
 driver_rank_window = Window.partitionBy('race_year').orderBy(desc('total_points'),desc('wins'))
 driver_standing=final_df.withColumn('rank', rank().over(driver_rank_window))
-
-# COMMAND ----------
-
-display(driver_standing)
 
 # COMMAND ----------
 

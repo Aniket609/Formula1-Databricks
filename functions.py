@@ -26,3 +26,16 @@ def createMount(storage_account_name, container_name):
 createMount(storage_account_name="aniketformula1dl", container_name="raw")
 createMount(storage_account_name="aniketformula1dl", container_name="processed")
 createMount(storage_account_name="aniketformula1dl", container_name="presentation")
+
+# COMMAND ----------
+
+def vacuum_and_optimize_database(database):
+    tables = spark.sql(f"SHOW TABLES IN {database} ").select("tableName").rdd.flatMap(lambda x: x).collect()
+    for table in tables:
+        spark.sql(f"VACUUM {database}.{table} RETAIN 0 HOURS")
+        spark.sql(f"OPTIMIZE {database}.{table}")
+    print(f"Database '{database}' has been vacuumed and optimized!")
+spark.conf.set("spark.databricks.delta.retentionDurationCheck.enabled", "false")
+vacuum_and_optimize_database('processed')
+vacuum_and_optimize_database('presentation')
+
