@@ -1,0 +1,27 @@
+{
+    "cluster_name": "Aniket's Cluster",
+    "spark_version": "14.3.x-scala2.12",
+    "spark_conf": {
+        "spark.master": "local[*, 4]",
+        "spark.databricks.cluster.profile": "singleNode",
+        "spark.databricks.catalog.enabled": "true"
+    },
+    "azure_attributes": {
+        "first_on_demand": 1,
+        "availability": "ON_DEMAND_AZURE",
+        "spot_bid_max_price": -1
+    },
+    "node_type_id": "Standard_DS3_v2",
+    "driver_node_type_id": "Standard_DS3_v2",
+    "custom_tags": {
+        "ResourceClass": "SingleNode"
+    },
+    "autotermination_minutes": 20,
+    "enable_elastic_disk": true,
+    "enable_local_disk_encryption": false,
+    "data_security_mode": "NONE",
+    "runtime_engine": "STANDARD",
+    "effective_spark_version": "14.3.x-scala2.12",
+    "num_workers": 0,
+    "apply_policy_default_values": false
+}
