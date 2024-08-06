@@ -1,0 +1,27 @@
+resources:
+  jobs:
+    Run_Formula1_Project:
+      name: Run Formula1 Project
+      tasks:
+        - task_key: ingest_all
+          run_job_task:
+            job_id: 26024142082031
+        - task_key: transform_all
+          depends_on:
+            - task_key: ingest_all
+          run_job_task:
+            job_id: 396496763769699
+        - task_key: present_all
+          depends_on:
+            - task_key: transform_all
+          run_job_task:
+            job_id: 131916679146579
+      queue:
+        enabled: true
+      parameters:
+        - name: raw_path
+          default: /mnt/aniketformula1dl/raw
+        - name: processed_path
+          default: /mnt/aniketformula1dl/processed
+        - name: presentation_path
+          default: /mnt/aniketformula1dl/presentation

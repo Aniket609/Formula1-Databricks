@@ -1,0 +1,73 @@
+resources:
+  jobs:
+    Ingest_All:
+      name: Ingest All
+      tasks:
+        - task_key: circuits
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/circuits_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+        - task_key: constructors
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/constructors_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+        - task_key: drivers
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/drivers_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+        - task_key: laptimes
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/laptimes_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+        - task_key: pitstops
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/pitstops_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+        - task_key: qualifying
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/qualifying_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+        - task_key: races
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/races_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+        - task_key: results
+          notebook_task:
+            notebook_path: /Repos/aniketchatterjee2000ee@outlook.com/Formula1-Databricks/ingestion/results_ingest
+            source: WORKSPACE
+          job_cluster_key: Job_cluster
+      job_clusters:
+        - job_cluster_key: Job_cluster
+          new_cluster:
+            cluster_name: ""
+            spark_version: 14.3.x-scala2.12
+            spark_conf:
+              spark.master: local[*, 4]
+              spark.databricks.cluster.profile: singleNode
+            azure_attributes:
+              first_on_demand: 1
+              availability: ON_DEMAND_AZURE
+              spot_bid_max_price: -1
+            node_type_id: Standard_D4ds_v5
+            custom_tags:
+              ResourceClass: SingleNode
+            spark_env_vars:
+              PYSPARK_PYTHON: /databricks/python3/bin/python3
+            enable_elastic_disk: true
+            data_security_mode: NONE
+            runtime_engine: PHOTON
+            num_workers: 0
+      queue:
+        enabled: true
+      parameters:
+        - name: processed_path
+          default: /mnt/aniketformula1dl/processed
+        - name: raw_path
+          default: /mnt/aniketformula1dl/raw
